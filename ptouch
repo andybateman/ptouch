@@ -1,0 +1,19 @@
+#!/bin/zsh
+# ptouch: print labels on a Brother P-touch over USB (HOWITWORKS.md has the detail).
+#   ptouch status | models             loaded tape and errors | the models it knows
+#   ptouch BLE-4 THR-2                 house-style labels as one half-cut strip (FILE.png prints an image)
+#   ptouch qr|tag|flag|wifi|ql ...     QR label, Home Assistant tag, cable flag, Wi-Fi join code, QL printer
+#   ptouch me [N]                      your own QR label (set in ~/.config/ptouch/config.json), N copies
+#   common: --preview --plain --copies N --tape MM, a bare number = text height in dots (28 = 4 mm)
+D=${0:A:h}
+RUN=(uv run -q --no-project --with pyusb --with pillow)
+case $1 in
+  status) exec $RUN python $D/pt.py ;;
+  models) exec $RUN python $D/pt.py models ;;
+  me) shift; N=1; [[ $1 == <-> ]] && { N=$1; shift }; set -- me --copies $N "$@" ;;
+  ""|-h|--help) sed -n 2,7p $0 | sed 's/^# //'; exit 1 ;;
+esac
+case $1 in
+  qr|me|tag|flag|wifi|ql) PYTHONPATH=$D exec $RUN --with qrcode --with opencv-python-headless --with numpy --with websockets python $D/ptouch.py "$@" ;;
+esac
+PYTHONPATH=$D exec $RUN python $D/printlabels.py "$@"
