@@ -5,6 +5,7 @@
 - **`localcfg.py`:** the label top line, the `ptouch me` label and the Home Assistant connection come from `~/.config/ptouch/config.json` (or `$PTOUCH_CONFIG`); `HA_URL` and `HA_TOKEN` work too. No personal details, hosts or paths in the code.
 - **`ptouch me [N]`:** your own QR label from the config, N copies on one strip; other options (`--preview`, `--tape`) pass through.
 - The `ptouch` command finds its own folder through a symlink, so it can be linked anywhere on the PATH.
+- MIT licence.
 - `SKILL.md` reads an optional, untracked `LOCAL.md` for a machine's own conventions.
 
 ## [2026-11-23] - Other Brother models, the QL-1110NWB, qr / tag / flag / wifi, --copies, wider tape

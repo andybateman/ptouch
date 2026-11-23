@@ -25,3 +25,5 @@ Printed from a PT-E560BT and a PT-E550W; other 128-pin USB P-touch models and th
 - `ptouch` (the command), `pt.py` (models, USB, status), `printlabels.py` (text labels, printing), `ptouch.py` (qr, me, tag, flag, wifi, ql), `qrlabel.py` (layouts, scan check), `localcfg.py` (personal settings)
 - [HOWITWORKS.md](HOWITWORKS.md): use, label layout, protocol notes
 - [CHANGELOG.md](CHANGELOG.md): what changed
+
+MIT licence: [LICENSE](LICENSE).
