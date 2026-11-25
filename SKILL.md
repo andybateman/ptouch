@@ -16,7 +16,7 @@ The user wants a label: a device or board, a cable, a box, a drive, a QR code (c
    - `ptouch qr PAYLOAD [LINE1 [LINE2]] [--small TEXT]` QR label; it refuses to print a code that fails the scan check
    - `ptouch me [N]` the user's own QR label from `~/.config/ptouch/config.json`, N copies
    - `ptouch tag NAME [LINE]` creates a Home Assistant tag and prints its QR; then build the automation (trigger: Tag scanned)
-   - `ptouch flag TEXT [--wrap MM]` cable flag
+   - `ptouch flag TEXT [TEXT ...] [--wrap MM]` cable flags, one per TEXT on one strip (`--wrap 6` for a component lead)
    - `ptouch wifi SSID [--keychain]` Wi-Fi join code: the password is typed hidden or read from Keychain (macOS asks first); never print or log it
    - `ptouch ql --size WxHmm TEXT... | FILE.png` the QL-1110NWB (sizes: `lpoptions -p Brother_QL_1110NWB -l`)
    - `--copies N` on any of them

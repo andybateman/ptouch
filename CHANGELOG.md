@@ -1,5 +1,10 @@
 # Changelog - ptouch
 
+## [2026-11-25] - Several cable flags on one strip; --help no longer prints
+
+- **`ptouch flag TEXT [TEXT ...]`:** one flag per text, all on one half-cut strip (it printed only the first text before). `--wrap 6` suits a component lead.
+- **`-h` / `--help` after a subcommand** shows the usage; before, `ptouch flag --help` printed a flag reading "--help".
+
 ## [2026-11-23] - Public release: personal settings moved to a config file
 
 - **`localcfg.py`:** the label top line, the `ptouch me` label and the Home Assistant connection come from `~/.config/ptouch/config.json` (or `$PTOUCH_CONFIG`); `HA_URL` and `HA_TOKEN` work too. No personal details, hosts or paths in the code.

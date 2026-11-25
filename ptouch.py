@@ -10,7 +10,7 @@ def usage():
   ptouch qr PAYLOAD [LINE1 [LINE2]] [--small TEXT]   QR code (a link, any text) with up to two lines
   ptouch me [N]                                    your own QR label from the config file, N copies
   ptouch tag NAME [LINE]                           Home Assistant tag: creates it in HA, prints its QR
-  ptouch flag TEXT [--wrap MM]                     cable flag: TEXT, a blank wrap, TEXT turned round
+  ptouch flag TEXT [TEXT ...] [--wrap MM]          cable flags, one per TEXT on one strip: TEXT, a blank wrap, TEXT turned round
   ptouch wifi SSID [--keychain]                    Wi-Fi join code; password typed (hidden) or from Keychain
   ptouch ql --size WxHmm TEXT... | FILE.png        print on the QL-1110NWB through macOS printing
 Common: --preview, --copies N, --tape MM (preview width when no printer answers)""")
@@ -71,7 +71,7 @@ def ql_print(o, size, args):
     print(f"sent to {printer}: {size}, {o['copies']} copy(ies)")
 
 def main():
-    if len(sys.argv) < 2: usage()
+    if len(sys.argv) < 2 or any(a in ("-h", "--help") for a in sys.argv[1:]): usage()
     cmd, args = sys.argv[1], sys.argv[2:]
     small = wrap = size = None; keychain = False
     rest = []
@@ -109,7 +109,7 @@ def main():
         if not o["preview"]: print(f"HA tag '{name}' = {tag_id} ({'created' if new else 'existing'}): add an automation with trigger 'Tag scanned' on it")
     elif cmd == "flag":
         if not r: usage()
-        pl.run(rep(lambda h: [(f"flag {r[0]}", ql.build_flag(r[0], h, wrap or 25, o["cap"]))]), o["preview"], o["tape"])
+        pl.run(rep(lambda h: [(f"flag {t}", ql.build_flag(t, h, wrap or 25, o["cap"])) for t in r]), o["preview"], o["tape"])
     elif cmd == "wifi":
         if not r: usage()
         ssid = r[0]
